@@ -1,0 +1,99 @@
+{% extends "app/base.html" %}
+{% block title %}Buy Ticket{% endblock title %}
+
+{% block main_content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">{{ event.title }}</h2>
+    
+    <div class="row">
+        <!-- Event Details Section -->
+        <div class="col-md-6">
+            <img src="{{ event.image.url }}" class="img-fluid mb-3" alt="{{ event.title }}">
+            <h4>Event Details</h4>
+            <p><strong>Date:</strong> {{ event.date|date:"F d, Y" }}</p>
+            <p><strong>Location:</strong> {{ event.location }}</p>
+            <p>{{ event.description }}</p>
+        </div>
+
+        <!-- Ticket Purchase Section -->
+        <div class="col-md-6">
+            <h4>Buy Tickets</h4>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="ticket_type" class="form-label">Ticket Type</label>
+                    <select name="ticket_type" id="ticket_type" class="form-select" required>
+                        {% for ticket_type, price in ticket_types.items %}
+                        <option value="{{ ticket_type }}">{{ ticket_type }} - Rs.{{ price }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control" min="1" value="1" required>
+                </div>
+                <div class="mb-3">
+                    <p><strong>Total Price:</strong> Rs.<span id="total_price">0</span></p>
+                </div>
+                <button type="submit" class="btn btn-primary">Buy Ticket</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    const ticketTypeSelect = document.getElementById("ticket_type");
+    const quantityInput = document.getElementById("quantity");
+    const totalPriceSpan = document.getElementById("total_price");
+
+    const ticketPrices = {{ ticket_types|safe }};
+    
+    function updateTotalPrice() {
+        const selectedType = ticketTypeSelect.value;
+        const quantity = quantityInput.value;
+        const price = ticketPrices[selectedType] || 0;
+        totalPriceSpan.textContent = (price * quantity).toFixed(2);
+    }
+
+    ticketTypeSelect.addEventListener("change", updateTotalPrice);
+    quantityInput.addEventListener("input", updateTotalPrice);
+
+    
+    updateTotalPrice();
+
+    
+</script>
+{% endblock main_content %}
+
+
+{% block payment-gateway %}
+    <script>
+        var options = {
+            "key": "rzp_test_9HCFObJmJZso3f", // Enter the Key ID generated from the Dashboard
+            "amount": "{{razoramount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Event", //your business name
+            "description": "Buy Ticket",
+            "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function(response){
+                console.log("success")
+                var form = document.getElementById("myform");
+                window.location.href = 'http://localhost:8000/paymentdone?order_id=${response.razorpay_order_id}&payment_id=${response.razorpay_payment_id}&cust_id=${form.elements["custid"].value}'
+            },
+            "theme": {
+            "color": "#3399cc"
+            }
+        };
+                   
+        var rzp1 = new Razorpay(options);
+        rzp1.on('payment.failed',function (response){
+            alert(response.error.description);
+        })
+        document.getElementById('rzp-button1').onclick = function(e){
+            console.log("button clicked");
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+{% endblock payment-gateway %}

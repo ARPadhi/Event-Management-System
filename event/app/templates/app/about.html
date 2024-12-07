@@ -1,0 +1,25 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}About{% endblock title %}
+
+{% block main_content %}
+<div class="container text-center my-5">
+    <!-- Header -->
+    <div class="header">
+        <h1>Hello There!</h1>
+    </div>
+
+    <!-- Image Section -->
+    <div class="about-image d-flex justify-content-center my-4">
+        <img src="{% static 'images/banner/banner3.jpg' %}" class="d-block w-50" alt="Event Planning Image">
+    </div>
+
+    <!-- Description Section -->
+    <div class="description">
+        <p>
+            It's simple. You have an event to plan, and we have the solution. As the leading event planning company in the city, 
+            we understand that one size does not fit all. Each event and client is unique, and we believe our services 
+            should reflect that as well.
+        </p>
+    </div>
+{% endblock main_content %}

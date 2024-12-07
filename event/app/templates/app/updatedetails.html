@@ -1,0 +1,28 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Update Details{% endblock title%}
+
+{% block main_content %}
+<div class="container my-5">
+    <div class="row my-5">
+        <h3>Welcome <small class="text-capitalize">{{request.user}}</small></h3>
+        <div>
+        <div class="col-sm-8 offset-sm-1">
+            <form action=" " method="post">
+                {% csrf_token %}
+                {% for fm in form %}
+                    {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+                {% endfor %}
+                <div class="col-12 mt-3">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="{% url "details" %}" type="button" class="btn btn-danger">Back</a>
+                </div>
+
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="alert alert-danger">{{error}}</p>
+                    {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+{% endblock main_content %}

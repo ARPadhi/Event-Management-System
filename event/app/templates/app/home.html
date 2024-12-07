@@ -1,0 +1,51 @@
+{% extends "app/base.html" %}
+
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block banner_slider %}
+<div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'images/banner/banner3.jpg' %}" class="d-block w-100" alt="banner" >
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner/banner2.jpg' %}" class="d-block w-100" alt="banner" >
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner/banner1.jpg' %}" class="d-block w-100" alt="banner" >
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner/banner4.jpg' %}" class="d-block w-100" alt="banner" >
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner/banner5.jpg' %}" class="d-block w-100" alt="banner" >
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner/banner6.jpg' %}" class="d-block w-100" alt="banner" >
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+{% endblock banner_slider %}
+
+{% block information %}
+<div class="container1 mt-5 d-flex justify-content-center">
+  <div class="row p-5">
+    <h1>Hello There!<br>Turning your vision into a celebration.</h1>
+  </div>
+</div>
+{% endblock information %}
+
+
+{% block main_content %}
+
+{% endblock main_content %}

@@ -1,0 +1,33 @@
+{% extends "app/base.html" %}
+{% block title %}My Tickets{% endblock title %}
+
+{% block main_content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">My Tickets</h2>
+
+    {% if ticket %}
+        <div class="row">
+            {% for tic in ticket %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ tic.image.url }}" class="card-img-top" alt="{{ tic.event.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ tic.event.title }}</h5>
+                            <p class="card-text">
+                                <strong>Event Date:</strong> {{ tic.event.date|date:"F d, Y" }}<br>
+                                <strong>Ticket Type:</strong> {{ tic.ticket_type }}<br>
+                                <strong>Price:</strong> Rs.{{ tic.price }}<br>
+                                <strong>Location:</strong> {{ tic.event.location }}
+                            </p>
+                            {% comment %} <a href="{% url 'download_ticket' ticket.id %}" class="btn btn-success btn-sm">Download</a>
+                            <a href="{% url 'print_ticket' ticket.id %}" class="btn btn-primary btn-sm">Print</a> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">You haven't purchased any tickets yet.</p>
+    {% endif %}
+</div>
+{% endblock main_content %}

@@ -1,0 +1,47 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block main_content %}
+<div class="container mt-4">
+    <h1>Dashboard</h1>
+    <p>Welcome, {{ request.user }}! Here's an overview of your events.</p>
+
+    
+    <div class="text-end mb-4">
+        <a href="{% url 'newevent' %}" class="btn btn-primary">+ Create New Event</a>
+    </div>
+
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Your Events</h4>
+        </div>
+        <div class="card-body">
+            {% if events %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Event Name</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Ticket Left</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in events %}
+                        <tr>
+                            <td>{{ event.title }}</td>
+                            <td>{{ event.date }}</td>
+                            <td>{{ event.location }}</td>
+                            <td>{{ event.capacity }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No events found. <a href="{% url 'newevent' %}">Create your first event!</a></p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

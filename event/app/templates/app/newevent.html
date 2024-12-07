@@ -1,0 +1,13 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}New Event{% endblock title %}
+{% block main_content %}
+<div class="container mt-5">
+    <h1>Create a New Event</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Create Event</button>
+    </form><br><br><br>
+</div>
+{% endblock %}

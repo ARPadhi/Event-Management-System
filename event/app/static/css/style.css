@@ -1,0 +1,129 @@
+/* Base styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full height for sticky footer */
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover {
+    color: #ff0000; /* Red on hover */
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #111; /* Darker black */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff0000; /* Red logo */
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar .searchbar {
+    padding: 5px 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #222;
+    color: #fff;
+}
+
+.navbar .searchbar:focus {
+    outline: none;
+    border-color: #ff0000;
+}
+
+.navbar .login-btn {
+    padding: 5px 15px;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #ff0000;
+    cursor: pointer;
+}
+
+.navbar .login-btn:hover {
+    background-color: #ff0000;
+    color: #000;
+}
+
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 5px 5px;
+    background-color: #111;
+    color: #fff;
+    margin-top: auto; /* Push footer to the bottom */
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.5);
+}
+
+footer a {
+    color: #ff0000;
+}
+
+/* Home styles */
+.container1{
+    text-align: center;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.container1.h1{
+    font-family: 'Montserrat', sans-serif; 
+    
+}
+
+
+/* About Styles */
+.header{
+    font-family: cursive;
+    font-size:larger;
+    color: rgb(240, 23, 23);
+    
+}
+
+.description{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+/* contact styles */
+.contact{
+    font-family: 'Montserrat', sans-serif; 
+    background-color: dark; 
+    color: white;
+}

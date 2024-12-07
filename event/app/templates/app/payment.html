@@ -1,0 +1,26 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Payment{% endblock title %}
+
+{% block main_content %}
+<div class="container my-5 text-center">
+    <h3>Complete Your Payment</h3>
+    <p>Event: {{ event.title }}</p>
+    <p>Total Amount: ₹{{ order.amount // 100 }}</p>
+
+    <form action="{% url 'payment_success' %}" method="POST">
+        {% csrf_token %}
+        <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="{{ razorpay_key_id }}"
+            data-amount="{{ order.amount }}"
+            data-currency="INR"
+            data-order_id="{{ order.id }}"
+            data-buttontext="Pay Now"
+            data-name="Event Management System"
+            data-description="Ticket Purchase"
+            data-theme.color="#3399cc">
+        </script>
+    </form>
+</div>
+{% endblock main_content %}
